@@ -1,5 +1,5 @@
 export const ADD_GOAL = 'ADD_GOAL';
-export const REMOV_GOAL = 'REMOVE_GOAL';
+export const REMOVE_GOAL = 'REMOVE_GOAL';
 
 function addGoal(goal) {
     return {
@@ -10,7 +10,7 @@ function addGoal(goal) {
 
 function removeGoal(id) {
     return {
-        type: REMOV_GOAL,
+        type: REMOVE_GOAL,
         id,
     }
 }
