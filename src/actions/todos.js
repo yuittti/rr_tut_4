@@ -29,7 +29,7 @@ export function handleAddTodo(name, cb) {
     return (dispatch) => {
         return API.saveTodo(name)
             .then((todo) => {
-                dispatch(addTodo);
+                dispatch(addTodo(todo));
                 cb();
             })
             .catch(() => alert('There was an error. Try again'));

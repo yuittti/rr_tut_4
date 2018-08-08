@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 export default function List(props) {
-    const {items, toggle} = props;
+    const {items, toggle, remove} = props;
     return (
         <ul>
             {items.map((item) => (
@@ -12,7 +12,7 @@ export default function List(props) {
                     >
                         {item.name}
                     </span>
-                    <button>x</button>
+                    <button onClick={() => remove(item)}>x</button>
                 </li>
             ))}
         </ul>

@@ -1,21 +1,23 @@
 import React, { Component } from 'react';
 import List from './List';
+import { connect } from 'react-redux';
+import { handleRemoveGoal , handleAddGoal } from '../actions/goals';
 
 class Goals extends Component {
-    state = {
-        goals: [
-            {
-                name: 'Goal1',
-                id: 0,
-            },
-            {
-                name: 'Goal2',
-                id: 1
-            }
-        ]
-    };
+    addItem = (e) => {
+        if (!this.input.value.length) return false;
+        this.props.dispatch(handleAddGoal(
+            this.input.value,
+            () => this.input.value = ''
+        ));
+    }
+
+    removeItem = (item) => {
+        this.props.dispatch(handleRemoveGoal(item));
+    }
 
     render() { 
+        const {goals} = this.props;
         return (
             <div>
                 <h1>Goals List</h1>
@@ -23,13 +25,16 @@ class Goals extends Component {
                     type="text" 
                     placeholder='Add Goal' 
                     ref={(input) => this.input = input} />
-                <button>Add</button>
+                <button onClick={this.addItem}>Add</button>
                 <List 
-                    items={this.state.goals}
+                    items={goals}
+                    remove={this.removeItem}
                 />
             </div>
         );
     }
 }
- 
-export default Goals;
+
+export default connect((store) => ({
+    goals: store.goals,
+}))(Goals);
